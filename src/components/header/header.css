@@ -1,0 +1,11 @@
+.pw-header {
+    height: 3.5rem;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
+    z-index: 4;
+    background-color: white;
+  }
+ 
+.header-opacity{
+    opacity: 0.5;
+    z-index: -1;
+}  

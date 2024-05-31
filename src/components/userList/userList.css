@@ -1,0 +1,81 @@
+.add-new-bunit{
+ color: white;
+  background-color: #22b470;
+  padding: 2px 5px 2px 5px;
+  width: 8rem;
+  height: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.table {
+ border: 1px solid rgb(224, 224, 224);
+ 
+ /* padding: 5px;
+ background-color: #f5f5f5; */
+
+}
+.table-head {
+    height: 2.9rem;
+    background-color: #f5f5f5;
+    color: #596981
+}
+.table-body th,
+.table-body td {
+  height: 3.2rem;
+  padding: 6px;
+  font-family: sans-serif;
+  font-weight: 400;
+  color: black !important;
+  border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+/* tr td {
+  color: black  ;
+  font-weight: 100;
+  font-size: large;
+} */
+
+.list-input input {
+  border: 1px solid rgb(224, 224, 224);
+  height: 1.8rem;
+  border-radius:4px;
+  width: 9rem;
+  padding: 10px;
+  font-size: medium;
+  font-weight: 200;
+}
+.user-select select {
+  border: 1px solid rgb(224, 224, 224);
+  height: 1.8rem;
+  border-radius:4px;
+  width:9rem;
+  padding: 3px;
+}
+.status {
+  color: #70a268 !important;
+  background-color: #eef6ed !important;
+  border-radius:4px ;
+  height: 1.8rem;
+  width:7rem;
+  padding: 3px;
+  border: 1px solid #70a268 ;
+}
+/* .remove {
+  color: white;
+  background-color:#f5f5f5;
+  padding: 2px 5px 2px 5px;
+  width: 8rem;
+  height: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+.dropdown-icon {
+  width: 1.5rem;
+}
