@@ -9,3 +9,10 @@
     opacity: 0.5;
     z-index: -1;
 }  
+.header-select select{
+  border: 1px solid rgb(224, 224, 224);
+  height: 2rem;
+  border-radius:4px;
+  width: 15rem;
+  padding: 3px;
+}

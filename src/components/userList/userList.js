@@ -19,8 +19,18 @@ const UserList = () => {
   const [savedUsers, setSavedUsers] = useState([]);
 
   const handleActionClick = (userObj) => {
-    const unChangedUsers = savedUsers.filter((user)=>userObj.id !== user.id);
-    setSavedUsers([...unChangedUsers, {...userObj, showActionDropdown: !userObj.showActionDropdown}]);
+    const users = [...savedUsers];
+    const updatedUsers = users.map((each) => {
+      if (each.id === userObj.id) {
+        return {
+          ...each,
+          showActionDropdown: !userObj.showActionDropdown,
+        };
+      }
+      return each;
+    });
+    //const unChangedUsers = savedUsers.filter((user)=>userObj.id !== user.id);
+    setSavedUsers(updatedUsers);
   };
 
   const onRemoveUser = (userObj) => {
@@ -90,25 +100,27 @@ const UserList = () => {
                     <td align="center">{user.email}</td>
                     <td align="center">{user.firstName}</td>
                     <td align="center">{user.lastName}</td>
-                    <td align="center">{user.role}</td>
+                    <td align="center">
+                      <b>{user.role}</b>
+                    </td>
                     <td align="center">{user.expiryBy || "-"}</td>
                     <td align="center">
                       <button
-                        className="remove flex flex-row items-center dropdown-icon"
+                        className="flex flex-row items-center dropdown-icon action-button"
                         onClick={() => {
                           handleActionClick(user);
                         }}
                       >
-                        {"Actions"}
+                        Actions{" "}
                         <img src="assets/icons/dropdown.png" alt="no image" />
-                        {user.showActionDropdown && (
-                          <div className="dropdown">
-                            <ul>
-                              <li onClick={() => onRemoveUser(user)}>remove</li>
-                            </ul>
-                          </div>
-                        )}
                       </button>
+                      {user.showActionDropdown && (
+                        <div className="dropdown cursor-pointer">
+                          <ul>
+                            <li onClick={() => onRemoveUser(user)}>Remove</li>
+                          </ul>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 );
