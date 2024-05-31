@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./userCreation.css";
-
-function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0,
-      v = c == "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
+import { ADD_NEW_USER, ADD_USER, GET_COUNTRIES_ENDPOINT, REQUIRED_FIELD_MESSAGE, PLUS } from "../../constants/constants";
+import { uuidv4 } from "../utils/utils";
 
 const initialFormData = {
   country: "",
@@ -53,10 +47,12 @@ const UserCreation = (props) => {
   ];
 
   useEffect(() => {
-    fetch("https://api.first.org/data/v1/countries").then(async (res) => {
+    fetch(GET_COUNTRIES_ENDPOINT).then(async (res) => {
       const countryData = await res.json();
       const countryDetails = Object.values(countryData.data);
       setCountryList(countryDetails);
+    }).catch((err)=>{
+      console.log(err);
     });
   }, []);
 
@@ -104,14 +100,18 @@ const UserCreation = (props) => {
       { ...formData, id: uuidv4(), showActionDropdown: false },
     ]);
     setFormData(initialFormData);
-    onClose();
-    setIsSaveClicked(false);
-    setErrorFields([]);
+    handleClose();
   };
 
   const isErrorField = (field) => {
     return errorFields.includes(field);
   };
+
+  const showErrorMessage = (field) => {
+    return isErrorField("country") && (
+      <p className="error-message">{REQUIRED_FIELD_MESSAGE}</p>
+    );
+  }
 
   return open ? (
     <>
@@ -130,7 +130,7 @@ const UserCreation = (props) => {
             }}
             className=""
           />{" "}
-          Add New User
+          {ADD_NEW_USER}
         </div>
         <div className="flex flex-col gap-2 p-4">
           <form>
@@ -158,9 +158,7 @@ const UserCreation = (props) => {
                     return <option value={each.country}>{each.country}</option>;
                   })}
               </select>
-              {isErrorField("country") && (
-                <p className="error-message">Required Field</p>
-              )}
+              {showErrorMessage("country")}
             </div>
             <div
               className={`${
@@ -187,9 +185,7 @@ const UserCreation = (props) => {
                     return <option value={each}>{each}</option>;
                   })}
               </select>
-              {isErrorField("role") && (
-                <p className="error-message">Required Field</p>
-              )}
+              {showErrorMessage("role")}
             </div>
             <div
               className={`${
@@ -216,9 +212,7 @@ const UserCreation = (props) => {
                     return <option value={each}>{each}</option>;
                   })}
               </select>
-              {isErrorField("supervisor") && (
-                <p className="error-message">Required Field</p>
-              )}
+              {showErrorMessage("supervisor")}
             </div>
             <div className="flex flex-row gap-4 ">
               <div
@@ -239,9 +233,7 @@ const UserCreation = (props) => {
                   }}
                   required
                 />
-                {isErrorField("firstName") && (
-                  <p className="error-message">Required Field</p>
-                )}
+                {showErrorMessage("firstName")}
               </div>
               <div
                 className={`${
@@ -260,9 +252,7 @@ const UserCreation = (props) => {
                   }}
                   required
                 />
-                {isErrorField("lastName") && (
-                  <p className="error-message">Required Field</p>
-                )}
+                {showErrorMessage("lastName")}
               </div>
             </div>
             <div className="flex flex-row ">
@@ -323,9 +313,7 @@ const UserCreation = (props) => {
                 }}
                 required
               />
-              {isErrorField("email") && (
-                <p className="error-message">Required Field</p>
-              )}
+              {showErrorMessage("email")}
             </div>
             <div className="flex flex-row gap-4 mb-3">
               <div
@@ -348,9 +336,7 @@ const UserCreation = (props) => {
                   }}
                   required
                 />
-                {isErrorField("cardLoadLimit") && (
-                  <p className="error-message">Required Field</p>
-                )}
+                {showErrorMessage("cardLoadLimit")}
               </div>
               <div
                 className={`${
@@ -372,9 +358,7 @@ const UserCreation = (props) => {
                   }}
                   required
                 />
-                {isErrorField("paymentLimit") && (
-                  <p className="error-message">Required Field</p>
-                )}
+                {showErrorMessage("paymentLimit")}
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
@@ -383,12 +367,12 @@ const UserCreation = (props) => {
                 className="add-new-bunit text-sm"
                 onClick={() => handleSave()}
               >
-                {"+ Add User"}
+                {`${PLUS} ${ADD_USER}`}
               </button>
               <button
                 type="button"
                 className="add-cancle-bunit text-sm"
-                onClick={onClose}
+                onClick={()=>{handleClose()}}
               >
                 Cancel
               </button>

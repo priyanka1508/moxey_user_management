@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Header from "../header/header";
 import "./userList.css";
 import UserCreation from "../userCreation/userCreation";
+import { USERS_LIST, SETTINGS, PLUS, ADD_NEW_USER, ACTIVE, INACTIVE, ACTIONS, ALT_IMAGE, REMOVE } from "../../constants/constants";
 
 const cellColumns = [
   "STATUS",
@@ -29,7 +30,6 @@ const UserList = () => {
       }
       return each;
     });
-    //const unChangedUsers = savedUsers.filter((user)=>userObj.id !== user.id);
     setSavedUsers(updatedUsers);
   };
 
@@ -43,14 +43,14 @@ const UserList = () => {
     <Fragment>
       <Header openDrawer={openDrawer} />
       <div className="p-8 flex flex-col gap-5">
-        <div className="font-bold text-l flex flex-col gap-10">Settings</div>
+        <div className="font-bold text-l flex flex-col gap-10">{SETTINGS}</div>
         <div className="flex flex-row items-center justify-between">
-          Users List
+          {USERS_LIST}
           <div
             className="add-new-bunit text-sm"
             onClick={() => setOpenDrawer(true)}
           >
-            <span>+ Add New User</span>
+            <span>{`${PLUS} ${ADD_NEW_USER}`}</span>
           </div>
         </div>
         <UserCreation
@@ -72,8 +72,8 @@ const UserList = () => {
               <tr>
                 <th className="user-select">
                   <select className="status-dropdown">
-                    <option value="someOption">Active</option>
-                    <option value="otherOption">Inactive</option>
+                    <option value="someOption">{ACTIVE}</option>
+                    <option value="otherOption">{INACTIVE}</option>
                   </select>
                 </th>
                 <th></th>
@@ -111,13 +111,13 @@ const UserList = () => {
                           handleActionClick(user);
                         }}
                       >
-                        Actions{" "}
-                        <img src="assets/icons/dropdown.png" alt="no image" />
+                        {ACTIONS}{" "}
+                        <img src="assets/icons/dropdown.png" alt={ALT_IMAGE} />
                       </button>
                       {user.showActionDropdown && (
                         <div className="dropdown cursor-pointer">
                           <ul>
-                            <li onClick={() => onRemoveUser(user)}>Remove</li>
+                            <li onClick={() => onRemoveUser(user)}>{REMOVE}</li>
                           </ul>
                         </div>
                       )}
