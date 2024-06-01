@@ -150,9 +150,10 @@ const UserCreation = (props) => {
                 onChange={(e) => {
                   handleChange(e, "country");
                 }}
+                defaultValue={"Select Country"}
                 required
               >
-                <option value="Select Country">{"Select Country"}</option>
+                <option value="Select Country" disabled={true}>{"Select Country"}</option>
                 {countryList &&
                   countryList?.map((each) => {
                     return <option value={each.country}>{each.country}</option>;
@@ -177,9 +178,10 @@ const UserCreation = (props) => {
                 onChange={(e) => {
                   handleChange(e, "role");
                 }}
+                defaultValue={"Select Role"}
                 required
               >
-                <option value="Select Role">{"Select Role"}</option>
+                <option value="Select Role" disabled={true}>{"Select Role"}</option>
                 {roleList &&
                   roleList?.map((each) => {
                     return <option value={each}>{each}</option>;
@@ -204,9 +206,10 @@ const UserCreation = (props) => {
                 onChange={(e) => {
                   handleChange(e, "supervisor");
                 }}
+                defaultValue={"Select Supervisor"}
                 required
               >
-                <option value="Select Supervisor">{"Select Supervisor"}</option>
+                <option value="Select Supervisor" disabled={true}>{"Select Supervisor"}</option>
                 {supervisorList &&
                   supervisorList?.map((each) => {
                     return <option value={each}>{each}</option>;
